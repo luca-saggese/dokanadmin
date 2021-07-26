@@ -133,11 +133,11 @@ let TabNavigator = createBottomTabNavigator(TabNavigatorMenu,
         let IconComponent = Ionicons;
         let iconName;
         if (routeName === 'Reports') {
-          iconName = 'md-stats';
+          iconName = 'md-stats-chart';
         } else if (routeName === 'Products') {
           iconName = 'md-card';
         } else if (routeName === 'Orders') {
-          iconName = 'md-paper';
+          iconName = 'md-paper-plane';
         } else if (routeName === 'Reviews') {
           iconName = 'md-star';
         }

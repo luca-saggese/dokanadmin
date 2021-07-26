@@ -18,7 +18,7 @@ export default class Reports extends Component {
                     style={{ paddingRight: 20 }}
                     onPress={() => { navigation.navigate("Settings") }}
                 >
-                    <Ionicons name='md-more' size={25} color={config.colors.iconLightColor} />
+                    <Ionicons name='ellipsis-vertical' size={25} color={config.colors.iconLightColor} />
                 </TouchableOpacity>
             ),
         };
