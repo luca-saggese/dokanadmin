@@ -15,6 +15,7 @@ import OrdersList from './src/app/order/orderslist'
 import OrderDetails from './src/app/order/orderdetails'
 import ReviewsList from './src/app/review/reviewslist'
 import Settings from './src/app/setting/settings'
+import { RootSiblingParent } from 'react-native-root-siblings';
 
 const config = require('./config.json');
 
@@ -32,7 +33,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <MainApp />
+      <RootSiblingParent>
+        <MainApp />
+      </RootSiblingParent>
     );
   }
 }

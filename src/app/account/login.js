@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet, TextInput, TouchableOpacity, Text, ToastAndroid, ActivityIndicator,
+    StyleSheet, TextInput, TouchableOpacity, Text,  ActivityIndicator,
     Image, View, KeyboardAvoidingView, ScrollView
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 import * as SecureStore from 'expo-secure-store';
 import Base64 from '../../utility/base64';
 const config = require('../../../config.json');
@@ -24,6 +25,7 @@ export default class Login extends Component {
             base_url: null,
             username: null,
             password: null,
+            base_url: 'https://www.yummyummy.app',
         };
         this.showPass = this.showPass.bind(this);
         this.submitButton = this.submitButton.bind(this);
@@ -52,16 +54,16 @@ export default class Login extends Component {
                     'password': this.state.password,
                 }
                 await SecureStore.setItemAsync('credentials', JSON.stringify(credentials));
-                ToastAndroid.show('Authenticated...', ToastAndroid.LONG);
+                Toast.show('Authenticated...', { duration: Toast.durations.LONG });
                 return true;
             } else if (response.status >= 400 && response.status <= 500) {
                 let responseStatus = response.status;
                 let responseData = await response.json();
-                ToastAndroid.show(`Error: ${responseStatus} - ${responseData.message}`, ToastAndroid.LONG);
+                Toast.show(`Error: ${responseStatus} - ${responseData.message}`, { duration: Toast.durations.LONG });
                 return false;
             }
         } catch (error) {
-            ToastAndroid.show('Error Resolving Url - ' + error, ToastAndroid.LONG);
+            Toast.show('Error Resolving Url - ' + error, { duration: Toast.durations.LONG });
             return false;
         }
     }
@@ -85,6 +87,7 @@ export default class Login extends Component {
     }
 
     render() {
+        const {base_url} = this.state;
         return (
             <KeyboardAvoidingView behavior="padding" style={styles.container} enabled>
                 <ScrollView>
@@ -111,6 +114,7 @@ export default class Login extends Component {
                                 returnKeyType={'next'}
                                 placeholderTextColor={config.colors.textInputColor}
                                 underlineColorAndroid="transparent"
+                                value={base_url}
                                 onChangeText={(base_url) => this.setState({ 'base_url': base_url })}
                             />
                             <TextInput

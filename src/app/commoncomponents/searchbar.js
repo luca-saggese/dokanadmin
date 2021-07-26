@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, TouchableOpacity, Modal, StyleSheet, ToastAndroid, Dimensions } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, Modal, StyleSheet, Dimensions } from 'react-native';
+import Toast from 'react-native-root-toast';
 import { Ionicons } from '@expo/vector-icons';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 
@@ -34,7 +35,7 @@ export default class SearchBar extends Component {
         const { width, height } = Dimensions.get('window')
         this.getPermissionsAsync();
         if (this.state.hasCameraPermission === false) {
-            ToastAndroid.show('Camera Permission Not Granted', ToastAndroid.LONG)
+            Toast.show('Camera Permission Not Granted', { duration: Toast.durations.LONG })
         } else if (this.state.hasCameraPermission === true) {
             if (this.state.barcodeScannerShown) {
                 return (<Modal>

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, View, Switch, KeyboardAvoidingView, TouchableOpacity,
-    ScrollView, ActivityIndicator, TextInput, Picker, ToastAndroid
+    ScrollView, ActivityIndicator, TextInput, Picker
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FloatingLabel from 'react-native-floating-labels'
 import MultiSelect from 'react-native-multiple-select';
@@ -128,14 +129,14 @@ export default class AddProduct extends Component {
                         error: responseJson.code,
                         loading: false
                     })
-                    ToastAndroid.show('Error fetching product categories. Error Code: ' + responseJson.code, ToastAndroid.LONG)
+                    Toast.show('Error fetching product categories. Error Code: ' + responseJson.code, { duration: Toast.durations.LONG })
                 }
             }).catch((error) => {
                 this.setState({
                     error,
                     loading: false
                 })
-                ToastAndroid.show('Error fetching product categories. Error: ' + error, ToastAndroid.LONG)
+                Toast.show('Error fetching product categories. Error: ' + error, { duration: Toast.durations.LONG })
             });
     }
 
@@ -597,12 +598,12 @@ export default class AddProduct extends Component {
                         error: responseJson.code || null,
                         loading: false,
                     });
-                    ToastAndroid.show(`Product not added. Code: ${responseJson.code}`, ToastAndroid.LONG);
+                    Toast.show(`Product not added. Code: ${responseJson.code}`, { duration: Toast.durations.LONG });
                 } else {
                     this.setState({
                         loading: false,
                     })
-                    ToastAndroid.show('Product Added', ToastAndroid.LONG);
+                    Toast.show('Product Added', { duration: Toast.durations.LONG });
                     GLOBAL.productslistScreen.handleRefresh()
                     this.props.navigation.navigate('ProductsList')
                 }
@@ -611,7 +612,7 @@ export default class AddProduct extends Component {
                     error,
                     loading: false,
                 })
-                ToastAndroid.show(`Product not added. Error: ${responseJson.code}`, ToastAndroid.LONG);
+                Toast.show(`Product not added. Error: ${responseJson.code}`, { duration: Toast.durations.LONG });
             });
     }
 }

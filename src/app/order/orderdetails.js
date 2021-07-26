@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, View, TouchableOpacity, Clipboard, Image,
-    ScrollView, RefreshControl, ActivityIndicator, Modal, ToastAndroid
+    ScrollView, RefreshControl, ActivityIndicator, Modal
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 import Moment from 'moment';
 import * as SecureStore from 'expo-secure-store';
 import { Ionicons } from '@expo/vector-icons';
@@ -125,7 +126,7 @@ export default class OrderDetails extends Component {
                     this.setState({
                         error: responseJson.code
                     }, this.fetchOrderProductImages)
-                    ToastAndroid.show(`Can't fetch other order statuses. Error: ${responseJson.code}`, ToastAndroid.LONG);
+                    Toast.show(`Can't fetch other order statuses. Error: ${responseJson.code}`, { duration: Toast.durations.LONG });
                 } else {
                     let orderStatusMap = new Map();
                     if (responseJson) {
@@ -277,20 +278,20 @@ export default class OrderDetails extends Component {
         }).then((response) => response.json())
             .then(responseJson => {
                 if ('message' in responseJson)
-                    ToastAndroid.show(`Order Not Updated. Error: ${responseJson.message}`, ToastAndroid.LONG);
+                    Toast.show(`Order Not Updated. Error: ${responseJson.message}`, { duration: Toast.durations.LONG });
                 else if ('status' in responseJson) {
                     this.setState({
                         orderStatusValue: responseJson.status
                     })
-                    ToastAndroid.show(`Order status updated to ${responseJson.status}`, ToastAndroid.LONG)
+                    Toast.show(`Order status updated to ${responseJson.status}`, { duration: Toast.durations.LONG })
                 }
                 else {
-                    ToastAndroid.show(`Order Not Updated`, ToastAndroid.LONG)
+                    Toast.show(`Order Not Updated`, { duration: Toast.durations.LONG })
                 }
                 this.fetchOrderDetails()
                 GLOBAL.orderslistScreen.handleRefresh()
             }).catch((error) => {
-                ToastAndroid.show(`Order Not Updated`, ToastAndroid.LONG)
+                Toast.show(`Order Not Updated`, { duration: Toast.durations.LONG })
                 this.fetchOrderDetails()
             });
     }

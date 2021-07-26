@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, View, ActivityIndicator, TouchableOpacity,
-    Modal, ToastAndroid
+    Modal
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-root-toast';
 import RadioButtons from '../commoncomponents/radiobuttons'
 import * as SecureStore from 'expo-secure-store';
 import Base64 from '../../utility/base64';
@@ -71,7 +72,7 @@ export default class OrdersListFilters extends Component {
                     this.setState({
                         error: responseJson.code
                     }, this.fetchOrderProductImages)
-                    ToastAndroid.show(`Can't fetch other order statuses. Error: ${responseJson.code}`, ToastAndroid.LONG);
+                    Toast.show(`Can't fetch other order statuses. Error: ${responseJson.code}`, { duration: Toast.durations.LONG });
                 } else {
                     let orderStatusArray = [['all', 'all']];
                     if (responseJson) {

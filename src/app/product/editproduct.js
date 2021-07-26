@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {
     StyleSheet, Text, View, Switch, KeyboardAvoidingView, TouchableOpacity,
-    ScrollView, ActivityIndicator, TextInput, Picker, ToastAndroid
+    ScrollView, ActivityIndicator, TextInput, Picker
 } from 'react-native';
+import Toast from 'react-native-root-toast';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import FloatingLabel from 'react-native-floating-labels'
 import MultiSelect from 'react-native-multiple-select';
@@ -128,14 +129,14 @@ export default class EditProduct extends Component {
                         error: responseJson.code,
                         loading: false
                     })
-                    ToastAndroid.show('Error fetching product categories. Error Code: ' + responseJson.code, ToastAndroid.LONG)
+                    Toast.show('Error fetching product categories. Error Code: ' + responseJson.code, { duration: Toast.durations.LONG })
                 }
             }).catch((error) => {
                 this.setState({
                     error,
                     loading: false
                 })
-                ToastAndroid.show('Error fetching product categories. Error: ' + error, ToastAndroid.LONG)
+                Toast.show('Error fetching product categories. Error: ' + error, { duration: Toast.durations.LONG })
             });
     }
 
@@ -258,7 +259,7 @@ export default class EditProduct extends Component {
                     this.setState({
                         error: responseJson.code
                     })
-                    ToastAndroid.show('Error fetching product details. Error Code: ' + responseJson.code, ToastAndroid.LONG)
+                    Toast.show('Error fetching product details. Error Code: ' + responseJson.code, { duration: Toast.durations.LONG })
                 }
                 this.setState({
                     loading: false,
@@ -268,7 +269,7 @@ export default class EditProduct extends Component {
                     error,
                     loading: false
                 })
-                ToastAndroid.show('Error fetching product details. Error: ' + error, ToastAndroid.LONG)
+                Toast.show('Error fetching product details. Error: ' + error, { duration: Toast.durations.LONG })
             });
     }
 
@@ -728,9 +729,9 @@ export default class EditProduct extends Component {
                     loading: false,
                 });
                 if ("code" in responseJson) {
-                    ToastAndroid.show(`Product Not Updated. Error Code: ${responseJson.code}`, ToastAndroid.LONG);
+                    Toast.show(`Product Not Updated. Error Code: ${responseJson.code}`, { duration: Toast.durations.LONG });
                 } else {
-                    ToastAndroid.show('Product Updated', ToastAndroid.LONG);
+                    Toast.show('Product Updated', { duration: Toast.durations.LONG });
                     GLOBAL.productdetailsScreen.fetchProductDetails()
                     GLOBAL.productslistScreen.handleRefresh()
                     this.props.navigation.navigate('ProductDetails')
@@ -740,7 +741,7 @@ export default class EditProduct extends Component {
                     error,
                     loading: false,
                 })
-                ToastAndroid.show(`Product Not Updated. Error: ${error}`, ToastAndroid.LONG);
+                Toast.show(`Product Not Updated. Error: ${error}`, { duration: Toast.durations.LONG });
             });
     }
 }

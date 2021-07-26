@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, Modal, ScrollView, ToastAndroid, Picker, Switch } from 'react-native';
+import { StyleSheet, Text, View, ActivityIndicator, TouchableOpacity, Modal, ScrollView, Picker, Switch } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-root-toast';
 import RadioButtons from '../commoncomponents/radiobuttons'
 import FloatingLabel from 'react-native-floating-labels'
 import * as SecureStore from 'expo-secure-store';
@@ -111,10 +112,10 @@ export default class ProductsListFilters extends Component {
                         error: responseJson.code,
                         loading: false
                     })
-                    ToastAndroid.show("Can't fetch Product Categories. Error: " + responseJson.code, ToastAndroid.LONG)
+                    Toast.show("Can't fetch Product Categories. Error: " + responseJson.code, { duration: Toast.durations.LONG })
                 }
             }).catch((error) => {
-                ToastAndroid.show("Can't fetch Product Categories. Error: " + error, ToastAndroid.LONG)
+                Toast.show("Can't fetch Product Categories. Error: " + error, { duration: Toast.durations.LONG })
                 this.setState({
                     error,
                 })
